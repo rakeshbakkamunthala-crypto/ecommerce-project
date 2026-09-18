@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ product.name }}</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .product-detail {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .stock {
+            color: #555;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            margin-right: 10px;
+            padding: 10px 15px;
+            background: #222;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background: #444;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="product-detail">
+
+        <h1>{{ product.name }}</h1>
+
+        <p>{{ product.description }}</p>
+
+        <p class="price">₹{{ product.price }}</p>
+
+        <p class="stock">
+            Available Stock: {{ product.stock }}
+        </p>
+
+        {% if product.available %}
+            <p>✅ Available</p>
+
+            <a href="{% url 'add_to_cart' product.id %}" class="btn">
+                🛒 Add to Cart
+            </a>
+        {% else %}
+            <p>❌ Out of Stock</p>
+        {% endif %}
+
+        <a href="{% url 'product_list' %}" class="btn">
+            ← Back to Products
+        </a>
+
+        <a href="{% url 'cart' %}" class="btn">
+            🛒 View Cart
+        </a>
+
+    </div>
+
+</body>
+</html>

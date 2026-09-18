@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping Cart</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .cart {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .cart-item {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-name {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .price {
+            margin-top: 8px;
+        }
+
+        .total {
+            background: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            font-size: 22px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            margin-right: 10px;
+            padding: 10px 15px;
+            background: #222;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background: #444;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="cart">
+
+    <h1>Shopping Cart</h1>
+
+    {% for item in items %}
+
+    <div class="cart-item">
+
+        <div class="item-name">
+            {{ item.product.name }}
+        </div>
+
+        <p>
+            Quantity: {{ item.quantity }}
+        </p>
+
+        <p class="price">
+            Price: ₹{{ item.product.price }}
+        </p>
+
+        <p class="price">
+            Item Total: ₹{{ item.total_price }}
+        </p>
+
+    </div>
+
+    {% empty %}
+
+    <p>Your cart is empty.</p>
+
+    {% endfor %}
+
+    {% if items %}
+
+    <div class="total">
+        Cart Total: ₹{{ total }}
+    </div>
+
+    <a href="{% url 'checkout' %}" class="btn">
+        Proceed to Checkout
+    </a>
+
+    {% endif %}
+
+    <br>
+
+    <a href="{% url 'product_list' %}" class="btn">
+        ← Continue Shopping
+    </a>
+
+</div>
+
+</body>
+</html>
